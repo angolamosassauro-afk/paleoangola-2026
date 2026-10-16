@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PaleoAngola 2026 — Expedition Diary</title>
+    <style>
+        :root {
+            --ink: #17251f;
+            --muted: #68766f;
+            --paper: #f4f1e8;
+            --card: #fffdf8;
+            --line: #d9ded5;
+            --accent: #bd633b;
+            --green: #244d3b
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font: 16px/1.55 Georgia, 'Times New Roman', serif
+        }
+
+        .hero {
+            padding: clamp(2rem, 6vw, 6rem) max(1.2rem, calc((100vw - 1100px)/2));
+            background: var(--green);
+            color: #f7f4e9
+        }
+
+        .eyebrow,
+        .label,
+        .date {
+            font: 700 .75rem/1.3 Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: .14em
+        }
+
+        .eyebrow {
+            color: #e5b18e
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 6.5rem);
+            line-height: .94;
+            max-width: 900px;
+            margin: .8rem 0 1.4rem;
+            letter-spacing: -.045em
+        }
+
+        .hero p {
+            max-width: 720px;
+            font-size: 1.15rem;
+            color: #e0e7df
+        }
+
+        .meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            font: 700 .75rem Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: #d6dfd6
+        }
+
+        .layout {
+            max-width: 1100px;
+            margin: auto;
+            padding: 2rem 1.2rem 5rem
+        }
+
+        .notice {
+            padding: 1rem 1.2rem;
+            border-left: 4px solid var(--accent);
+            background: #fff8ed;
+            margin-bottom: 2rem;
+            font: .9rem/1.5 Arial, sans-serif
+        }
+
+        .toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin: 1.5rem 0 3rem
+        }
+
+        .toc a {
+            padding: .5rem .7rem;
+            border: 1px solid var(--line);
+            border-radius: 99px;
+            color: var(--green);
+            text-decoration: none;
+            font: 700 .75rem Arial, sans-serif
+        }
+
+        .entry {
+            padding: 2.2rem 0 3rem;
+            border-top: 1px solid #c8d0c6
+        }
+
+        .entry-head {
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 1rem;
+            align-items: start
+        }
+
+        .date {
+            color: var(--accent);
+            padding-top: .8rem
+        }
+
+        .entry h2 {
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            line-height: 1.05;
+            margin: .3rem 0 1rem;
+            letter-spacing: -.03em
+        }
+
+        .summary {
+            font-size: 1.08rem;
+            max-width: 850px
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: .8rem;
+            margin: 1.5rem 0
+        }
+
+        .media {
+            margin: 0;
+            background: #e5e7df;
+            min-width: 0;
+            overflow: hidden
+        }
+
+        .media img,
+        .media video {
+            display: block;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #d8ded5
+        }
+
+        .media figcaption {
+            font: .65rem/1.4 Arial, sans-serif;
+            padding: .5rem;
+            color: #58675f;
+            overflow-wrap: anywhere
+        }
+
+        .missing {
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: .4rem;
+            padding: 1rem;
+            color: #5b675e;
+            font: .8rem Arial, sans-serif;
+            background: repeating-linear-gradient(135deg, #e6e8df, #e6e8df 12px, #dce1d7 12px, #dce1d7 24px)
+        }
+
+        .missing span {
+            font-size: .7rem;
+            overflow-wrap: anywhere
+        }
+
+        .missing small {
+            max-width: 230px;
+            line-height: 1.4
+        }
+
+        .post {
+            position: relative;
+            background: var(--card);
+            border: 1px solid var(--line);
+            padding: 1.3rem 1.5rem;
+            margin-top: 1.4rem;
+            max-width: 850px
+        }
+
+        .post .label {
+            color: var(--accent)
+        }
+
+        .post p {
+            margin: .6rem 0 1rem
+        }
+
+        .copy {
+            border: 0;
+            background: var(--green);
+            color: white;
+            padding: .6rem .9rem;
+            cursor: pointer;
+            font: 700 .75rem Arial, sans-serif
+        }
+
+        .endnote {
+            background: #e8e9df;
+            padding: 1.5rem;
+            margin-top: 3rem
+        }
+
+        .endnote h2 {
+            margin-top: 0
+        }
+
+        .footer {
+            background: #17251f;
+            color: #d8e0d8;
+            padding: 2rem 1.2rem;
+            text-align: center;
+            font: .8rem Arial, sans-serif
+        }
+
+        .small {
+            font: .8rem/1.5 Arial, sans-serif;
+            color: var(--muted)
+        }
+
+        @media(max-width:760px) {
+            .gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .media img,
+            .media video,
+            .missing {
+                height: 170px
+            }
+
+            .entry-head {
+                grid-template-columns: 1fr;
+                gap: .1rem
+            }
+
+            .date {
+                padding-top: 0
+            }
+        }
+
+        @media(max-width:460px) {
+            .gallery {
+                grid-template-columns: 1fr
+            }
+
+            .media img,
+            .media video,
+            .missing {
+                height: 230px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="hero">
+        <div class="eyebrow">PaleoAngola · MNHN · Field season 2026</div>
+        <h1>Expedition<br>Diary</h1>
+        <p>A living record of the Bentiaba field season, built from the expedition WhatsApp group. Discoveries, field
+            logistics and scientific questions—documented as they emerge, with publication drafts to develop later.</p>
+        <div class="meta"><span>3–15 October 2026</span><span>Bentiaba · Angola</span><span>Working document</span>
+        </div>
+    </header>
+    <main class="layout">
+        <div class="notice"><strong>Media note:</strong> the supplied WhatsApp export contains attachment filenames but
+            not the image/video files themselves. This diary is configured to display them from a sibling folder named
+            <code>attachments</code>. Export/download the referenced WhatsApp attachments into that folder using the
+            exact filenames. Captions and identifications are provisional and should be checked with the scientific team
+            before publication.</div>
+        <h2>Timeline</h2>
+        <nav class="toc"><a href="#entry-1">03–05 OCT</a><a href="#entry-2">06 OCT</a><a href="#entry-3">07–09 OCT</a><a
+                href="#entry-4">10 OCT</a><a href="#entry-5">11 OCT</a><a href="#entry-6">12 OCT</a><a
+                href="#entry-7">13 OCT</a><a href="#entry-8">14 OCT</a><a href="#entry-9">15 OCT</a></nav>
+        <section class="entry" id="entry-1">
+            <div class="entry-head"><span class="date">03–05 OCT</span>
+                <h2>Arrival &amp; preparation</h2>
+            </div>
+            <p class="summary">The international team began arriving in Angola, with introductions, museum visits and
+                final logistical preparations ahead of the field campaign.</p>
+            <div class="gallery">
+                <figure class="media"><img loading="lazy" src="attachments/00002968-PHOTO-2026-10-03-22-17-47.jpg"
+                        alt="WhatsApp field image 1"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00002968-PHOTO-2026-10-03-22-17-47.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00002968-PHOTO-2026-10-03-22-17-47.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00002971-PHOTO-2026-10-03-22-30-08.jpg"
+                        alt="WhatsApp field image 2"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00002971-PHOTO-2026-10-03-22-30-08.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00002971-PHOTO-2026-10-03-22-30-08.jpg</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00002989-VIDEO-2026-10-04-13-57-01.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00002989-VIDEO-2026-10-04-13-57-01.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00002989-VIDEO-2026-10-04-13-57-01.mp4</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00002991-PHOTO-2026-10-04-14-15-04.jpg"
+                        alt="WhatsApp field image 4"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00002991-PHOTO-2026-10-04-14-15-04.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00002991-PHOTO-2026-10-04-14-15-04.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00002993-PHOTO-2026-10-04-14-15-04.jpg"
+                        alt="WhatsApp field image 5"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00002993-PHOTO-2026-10-04-14-15-04.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00002993-PHOTO-2026-10-04-14-15-04.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00002994-PHOTO-2026-10-04-14-15-04.jpg"
+                        alt="WhatsApp field image 6"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00002994-PHOTO-2026-10-04-14-15-04.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00002994-PHOTO-2026-10-04-14-15-04.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00002995-PHOTO-2026-10-04-14-15-04.jpg"
+                        alt="WhatsApp field image 7"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00002995-PHOTO-2026-10-04-14-15-04.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00002995-PHOTO-2026-10-04-14-15-04.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003008-PHOTO-2026-10-05-18-04-01.jpg"
+                        alt="WhatsApp field image 9"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003008-PHOTO-2026-10-05-18-04-01.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003008-PHOTO-2026-10-05-18-04-01.jpg</figcaption>
+                </figure>
+            </div>
+            <div class="post">
+                <div class="label">POSTING ANGLE / DRAFT</div>
+                <p>A campaign like this begins long before the first fossil is exposed: with people coming together,
+                    equipment being prepared and plans being coordinated.</p><button class="copy"
+                    onclick="copyText(this)">Copy draft</button>
+            </div>
+        </section>
+        <section class="entry" id="entry-2">
+            <div class="entry-head"><span class="date">06 OCT</span>
+                <h2>The field season begins</h2>
+            </div>
+            <p class="summary">The team set off for Bentiaba and the first field activities began. Early messages also
+                shared fossil-related material, including a tooth and a mark interpreted in discussion as a possible
+                bite mark. These observations should remain provisional pending scientific confirmation.</p>
+            <div class="gallery">
+                <figure class="media"><img loading="lazy" src="attachments/00003067-PHOTO-2026-10-06-08-33-52.jpg"
+                        alt="WhatsApp field image 1"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003067-PHOTO-2026-10-06-08-33-52.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003067-PHOTO-2026-10-06-08-33-52.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003070-PHOTO-2026-10-06-08-44-12.jpg"
+                        alt="WhatsApp field image 2"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003070-PHOTO-2026-10-06-08-44-12.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003070-PHOTO-2026-10-06-08-44-12.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003071-PHOTO-2026-10-06-08-45-14.jpg"
+                        alt="WhatsApp field image 3"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003071-PHOTO-2026-10-06-08-45-14.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003071-PHOTO-2026-10-06-08-45-14.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003080-PHOTO-2026-10-06-11-15-00.jpg"
+                        alt="WhatsApp field image 4"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003080-PHOTO-2026-10-06-11-15-00.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003080-PHOTO-2026-10-06-11-15-00.jpg</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00003081-VIDEO-2026-10-06-11-17-55.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003081-VIDEO-2026-10-06-11-17-55.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003081-VIDEO-2026-10-06-11-17-55.mp4</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003083-PHOTO-2026-10-06-12-11-33.jpg"
+                        alt="WhatsApp field image 6"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003083-PHOTO-2026-10-06-12-11-33.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003083-PHOTO-2026-10-06-12-11-33.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003085-PHOTO-2026-10-06-12-31-06.jpg"
+                        alt="WhatsApp field image 7"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003085-PHOTO-2026-10-06-12-31-06.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003085-PHOTO-2026-10-06-12-31-06.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003088-PHOTO-2026-10-06-13-29-14.jpg"
+                        alt="WhatsApp field image 8"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003088-PHOTO-2026-10-06-13-29-14.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003088-PHOTO-2026-10-06-13-29-14.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003095-PHOTO-2026-10-06-13-52-33.jpg"
+                        alt="WhatsApp field image 9"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003095-PHOTO-2026-10-06-13-52-33.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003095-PHOTO-2026-10-06-13-52-33.jpg</figcaption>
+                </figure>
+            </div>
+            <div class="post">
+                <div class="label">POSTING ANGLE / DRAFT</div>
+                <p>The first days are about settling into the field rhythm—and learning to look closely. Even a small
+                    mark or isolated tooth can raise questions worth investigating.</p><button class="copy"
+                    onclick="copyText(this)">Copy draft</button>
+            </div>
+        </section>
+        <section class="entry" id="entry-3">
+            <div class="entry-head"><span class="date">07–09 OCT</span>
+                <h2>The journey south</h2>
+            </div>
+            <p class="summary">Teams travelled by road and air toward the field site. Messages describe difficult
+                stretches of road, changing travel plans and the coordination required to move people and equipment to
+                Bentiaba.</p>
+            <div class="gallery">
+                <figure class="media"><img loading="lazy" src="attachments/00003261-PHOTO-2026-10-09-11-20-47.jpg"
+                        alt="WhatsApp field image 1"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003261-PHOTO-2026-10-09-11-20-47.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003261-PHOTO-2026-10-09-11-20-47.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003262-PHOTO-2026-10-09-11-27-16.jpg"
+                        alt="WhatsApp field image 2"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003262-PHOTO-2026-10-09-11-27-16.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003262-PHOTO-2026-10-09-11-27-16.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003263-PHOTO-2026-10-09-11-27-38.jpg"
+                        alt="WhatsApp field image 3"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003263-PHOTO-2026-10-09-11-27-38.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003263-PHOTO-2026-10-09-11-27-38.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003274-PHOTO-2026-10-09-12-59-55.jpg"
+                        alt="WhatsApp field image 4"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003274-PHOTO-2026-10-09-12-59-55.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003274-PHOTO-2026-10-09-12-59-55.jpg</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00003311-VIDEO-2026-10-09-14-14-53.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003311-VIDEO-2026-10-09-14-14-53.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003311-VIDEO-2026-10-09-14-14-53.mp4</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003313-PHOTO-2026-10-09-14-47-26.jpg"
+                        alt="WhatsApp field image 6"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003313-PHOTO-2026-10-09-14-47-26.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003313-PHOTO-2026-10-09-14-47-26.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003314-PHOTO-2026-10-09-14-47-36.jpg"
+                        alt="WhatsApp field image 7"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003314-PHOTO-2026-10-09-14-47-36.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003314-PHOTO-2026-10-09-14-47-36.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003315-PHOTO-2026-10-09-14-47-51.jpg"
+                        alt="WhatsApp field image 8"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003315-PHOTO-2026-10-09-14-47-51.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003315-PHOTO-2026-10-09-14-47-51.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003318-PHOTO-2026-10-09-14-55-11.jpg"
+                        alt="WhatsApp field image 9"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003318-PHOTO-2026-10-09-14-55-11.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003318-PHOTO-2026-10-09-14-55-11.jpg</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00003372-VIDEO-2026-10-09-18-10-06.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003372-VIDEO-2026-10-09-18-10-06.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003372-VIDEO-2026-10-09-18-10-06.mp4</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003373-PHOTO-2026-10-09-18-10-08.jpg"
+                        alt="WhatsApp field image 11"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003373-PHOTO-2026-10-09-18-10-08.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003373-PHOTO-2026-10-09-18-10-08.jpg</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00003377-VIDEO-2026-10-09-18-55-11.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003377-VIDEO-2026-10-09-18-55-11.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003377-VIDEO-2026-10-09-18-55-11.mp4</figcaption>
+                </figure>
+            </div>
+            <div class="post">
+                <div class="label">POSTING ANGLE / DRAFT</div>
+                <p>Field science depends on logistics as much as discovery: getting people, supplies and equipment
+                    safely to a remote site is part of the expedition story.</p><button class="copy"
+                    onclick="copyText(this)">Copy draft</button>
+            </div>
+        </section>
+        <section class="entry" id="entry-4">
+            <div class="entry-head"><span class="date">10 OCT</span>
+                <h2>Building the field station</h2>
+            </div>
+            <p class="summary">The teams arrived at camp and began setting up. Messages mention the practical work of
+                securing water, setting up tents and working on electricity. Road conditions were mixed, with some
+                damaged stretches and a section where the road gave way to off-road travel.</p>
+            <div class="gallery">
+                <figure class="media"><img loading="lazy" src="attachments/00003458-PHOTO-2026-10-10-12-44-00.jpg"
+                        alt="WhatsApp field image 1"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003458-PHOTO-2026-10-10-12-44-00.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003458-PHOTO-2026-10-10-12-44-00.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003460-PHOTO-2026-10-10-12-44-08.jpg"
+                        alt="WhatsApp field image 2"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003460-PHOTO-2026-10-10-12-44-08.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003460-PHOTO-2026-10-10-12-44-08.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003461-PHOTO-2026-10-10-12-44-09.jpg"
+                        alt="WhatsApp field image 3"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003461-PHOTO-2026-10-10-12-44-09.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003461-PHOTO-2026-10-10-12-44-09.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003462-PHOTO-2026-10-10-12-44-09.jpg"
+                        alt="WhatsApp field image 4"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003462-PHOTO-2026-10-10-12-44-09.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003462-PHOTO-2026-10-10-12-44-09.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003463-PHOTO-2026-10-10-12-44-10.jpg"
+                        alt="WhatsApp field image 5"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003463-PHOTO-2026-10-10-12-44-10.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003463-PHOTO-2026-10-10-12-44-10.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003464-PHOTO-2026-10-10-12-44-10.jpg"
+                        alt="WhatsApp field image 6"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003464-PHOTO-2026-10-10-12-44-10.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003464-PHOTO-2026-10-10-12-44-10.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003483-PHOTO-2026-10-10-17-39-43.jpg"
+                        alt="WhatsApp field image 7"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003483-PHOTO-2026-10-10-17-39-43.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003483-PHOTO-2026-10-10-17-39-43.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003484-PHOTO-2026-10-10-17-39-44.jpg"
+                        alt="WhatsApp field image 8"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003484-PHOTO-2026-10-10-17-39-44.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003484-PHOTO-2026-10-10-17-39-44.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003486-PHOTO-2026-10-10-18-04-53.jpg"
+                        alt="WhatsApp field image 9"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003486-PHOTO-2026-10-10-18-04-53.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003486-PHOTO-2026-10-10-18-04-53.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003487-PHOTO-2026-10-10-18-04-53.jpg"
+                        alt="WhatsApp field image 10"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003487-PHOTO-2026-10-10-18-04-53.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003487-PHOTO-2026-10-10-18-04-53.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003488-PHOTO-2026-10-10-18-04-54.jpg"
+                        alt="WhatsApp field image 11"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003488-PHOTO-2026-10-10-18-04-54.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003488-PHOTO-2026-10-10-18-04-54.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003489-PHOTO-2026-10-10-18-12-03.jpg"
+                        alt="WhatsApp field image 12"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003489-PHOTO-2026-10-10-18-12-03.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003489-PHOTO-2026-10-10-18-12-03.jpg</figcaption>
+                </figure>
+            </div>
+            <div class="post">
+                <div class="label">POSTING ANGLE / DRAFT</div>
+                <p>Before the scientific work can get going, a field station has to work. Water, shelter, power and
+                    teamwork are essential infrastructure for research in a remote landscape.</p><button class="copy"
+                    onclick="copyText(this)">Copy draft</button>
+            </div>
+        </section>
+        <section class="entry" id="entry-5">
+            <div class="entry-head"><span class="date">11 OCT</span>
+                <h2>Reading the evidence</h2>
+            </div>
+            <p class="summary">A specimen discussion focused on a mosasaur caudal vertebra and its haemal arch. The team
+                was reminded to include a millimetre/centimetre scale in specimen photographs so images can also support
+                scientific comparison.</p>
+            <div class="gallery">
+                <figure class="media"><img loading="lazy" src="attachments/00003627-PHOTO-2026-10-11-20-36-21.jpg"
+                        alt="WhatsApp field image 1"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003627-PHOTO-2026-10-11-20-36-21.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003627-PHOTO-2026-10-11-20-36-21.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003629-PHOTO-2026-10-11-20-39-12.jpg"
+                        alt="WhatsApp field image 2"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003629-PHOTO-2026-10-11-20-39-12.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003629-PHOTO-2026-10-11-20-39-12.jpg</figcaption>
+                </figure>
+            </div>
+            <div class="post">
+                <div class="label">POSTING ANGLE / DRAFT</div>
+                <p>A fossil photograph is more useful when it records not only what a specimen looks like, but also its
+                    size and context. Documentation is part of the science.</p><button class="copy"
+                    onclick="copyText(this)">Copy draft</button>
+            </div>
+        </section>
+        <section class="entry" id="entry-6">
+            <div class="entry-head"><span class="date">12 OCT</span>
+                <h2>A pterosaur bone—and fieldwork beyond the main camp</h2>
+            </div>
+            <p class="summary">A pterosaur bone was shared from the previous day’s work. The wider team was also
+                coordinating travel between field locations, including a return from Baía dos Tigres where connectivity
+                had been unavailable.</p>
+            <div class="gallery">
+                <figure class="media"><img loading="lazy" src="attachments/00003633-PHOTO-2026-10-12-10-06-16.jpg"
+                        alt="WhatsApp field image 1"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003633-PHOTO-2026-10-12-10-06-16.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003633-PHOTO-2026-10-12-10-06-16.jpg</figcaption>
+                </figure>
+            </div>
+            <div class="post">
+                <div class="label">POSTING ANGLE / DRAFT</div>
+                <p>The field record includes both individual finds and the movements that connect different locations,
+                    teams and stages of work.</p><button class="copy" onclick="copyText(this)">Copy draft</button>
+            </div>
+        </section>
+        <section class="entry" id="entry-7">
+            <div class="entry-head"><span class="date">13 OCT</span>
+                <h2>A new jaw near the beach</h2>
+            </div>
+            <p class="summary">Arthur reported a new jaw from the same stratigraphic level as material described in the
+                chat as “lindesaurus”, located closer to the beach. Other fragments prompted discussion about possible
+                identification, with scientists noting that further views or comparisons would be needed. A separate
+                fragment was tentatively considered to be a sea-turtle rib or a mosasaur haemal spine.</p>
+            <div class="gallery">
+                <figure class="media"><img loading="lazy" src="attachments/00003785-PHOTO-2026-10-13-18-44-06.jpg"
+                        alt="WhatsApp field image 1"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003785-PHOTO-2026-10-13-18-44-06.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003785-PHOTO-2026-10-13-18-44-06.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003786-PHOTO-2026-10-13-18-44-07.jpg"
+                        alt="WhatsApp field image 2"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003786-PHOTO-2026-10-13-18-44-07.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003786-PHOTO-2026-10-13-18-44-07.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003787-PHOTO-2026-10-13-18-44-07.jpg"
+                        alt="WhatsApp field image 3"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003787-PHOTO-2026-10-13-18-44-07.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003787-PHOTO-2026-10-13-18-44-07.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003788-PHOTO-2026-10-13-18-44-08.jpg"
+                        alt="WhatsApp field image 4"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003788-PHOTO-2026-10-13-18-44-08.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003788-PHOTO-2026-10-13-18-44-08.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003791-PHOTO-2026-10-13-18-47-32.jpg"
+                        alt="WhatsApp field image 5"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003791-PHOTO-2026-10-13-18-47-32.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003791-PHOTO-2026-10-13-18-47-32.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003812-PHOTO-2026-10-13-18-56-13.jpg"
+                        alt="WhatsApp field image 6"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003812-PHOTO-2026-10-13-18-56-13.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003812-PHOTO-2026-10-13-18-56-13.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003814-PHOTO-2026-10-13-18-57-22.jpg"
+                        alt="WhatsApp field image 7"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003814-PHOTO-2026-10-13-18-57-22.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003814-PHOTO-2026-10-13-18-57-22.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003815-PHOTO-2026-10-13-18-57-26.jpg"
+                        alt="WhatsApp field image 8"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003815-PHOTO-2026-10-13-18-57-26.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003815-PHOTO-2026-10-13-18-57-26.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003851-PHOTO-2026-10-13-20-09-05.jpg"
+                        alt="WhatsApp field image 9"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003851-PHOTO-2026-10-13-20-09-05.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003851-PHOTO-2026-10-13-20-09-05.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003856-PHOTO-2026-10-13-21-09-40.jpg"
+                        alt="WhatsApp field image 10"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003856-PHOTO-2026-10-13-21-09-40.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003856-PHOTO-2026-10-13-21-09-40.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003859-PHOTO-2026-10-13-21-09-41.jpg"
+                        alt="WhatsApp field image 11"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003859-PHOTO-2026-10-13-21-09-41.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003859-PHOTO-2026-10-13-21-09-41.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003866-PHOTO-2026-10-13-22-12-16.jpg"
+                        alt="WhatsApp field image 12"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003866-PHOTO-2026-10-13-22-12-16.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003866-PHOTO-2026-10-13-22-12-16.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003867-PHOTO-2026-10-13-22-12-16.jpg"
+                        alt="WhatsApp field image 13"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003867-PHOTO-2026-10-13-22-12-16.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003867-PHOTO-2026-10-13-22-12-16.jpg</figcaption>
+                </figure>
+            </div>
+            <div class="post">
+                <div class="label">POSTING ANGLE / DRAFT</div>
+                <p>Identification is often a process, not an instant answer. Researchers compare shapes, context and
+                    other specimens before deciding what a fragment can reliably tell us.</p><button class="copy"
+                    onclick="copyText(this)">Copy draft</button>
+            </div>
+        </section>
+        <section class="entry" id="entry-8">
+            <div class="entry-head"><span class="date">14 OCT</span>
+                <h2>Back in Bentiaba</h2>
+            </div>
+            <p class="summary">The group shared a large batch of photographs and videos from the field. A mark on a rock
+                prompted a question about whether it could be a shark tooth; another message raised “Globidens?” as a
+                possible identification. Both remain questions rather than confirmed identifications in the available
+                chat.</p>
+            <div class="gallery">
+                <figure class="media"><img loading="lazy" src="attachments/00003880-PHOTO-2026-10-14-09-13-22.jpg"
+                        alt="WhatsApp field image 1"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003880-PHOTO-2026-10-14-09-13-22.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003880-PHOTO-2026-10-14-09-13-22.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003881-PHOTO-2026-10-14-09-13-22.jpg"
+                        alt="WhatsApp field image 2"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003881-PHOTO-2026-10-14-09-13-22.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003881-PHOTO-2026-10-14-09-13-22.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003882-PHOTO-2026-10-14-09-35-29.jpg"
+                        alt="WhatsApp field image 3"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003882-PHOTO-2026-10-14-09-35-29.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003882-PHOTO-2026-10-14-09-35-29.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003883-PHOTO-2026-10-14-09-35-29.jpg"
+                        alt="WhatsApp field image 4"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003883-PHOTO-2026-10-14-09-35-29.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003883-PHOTO-2026-10-14-09-35-29.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003884-PHOTO-2026-10-14-09-35-29.jpg"
+                        alt="WhatsApp field image 5"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003884-PHOTO-2026-10-14-09-35-29.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003884-PHOTO-2026-10-14-09-35-29.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003898-PHOTO-2026-10-14-15-14-35.jpg"
+                        alt="WhatsApp field image 6"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003898-PHOTO-2026-10-14-15-14-35.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003898-PHOTO-2026-10-14-15-14-35.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003899-PHOTO-2026-10-14-15-14-35.jpg"
+                        alt="WhatsApp field image 7"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003899-PHOTO-2026-10-14-15-14-35.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003899-PHOTO-2026-10-14-15-14-35.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003900-PHOTO-2026-10-14-15-14-36.jpg"
+                        alt="WhatsApp field image 8"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003900-PHOTO-2026-10-14-15-14-36.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003900-PHOTO-2026-10-14-15-14-36.jpg</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00003912-VIDEO-2026-10-14-15-16-27.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003912-VIDEO-2026-10-14-15-16-27.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003912-VIDEO-2026-10-14-15-16-27.mp4</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00003913-VIDEO-2026-10-14-15-16-30.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003913-VIDEO-2026-10-14-15-16-30.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003913-VIDEO-2026-10-14-15-16-30.mp4</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003928-PHOTO-2026-10-14-18-08-34.jpg"
+                        alt="WhatsApp field image 11"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003928-PHOTO-2026-10-14-18-08-34.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003928-PHOTO-2026-10-14-18-08-34.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003930-PHOTO-2026-10-14-18-08-57.jpg"
+                        alt="WhatsApp field image 12"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003930-PHOTO-2026-10-14-18-08-57.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003930-PHOTO-2026-10-14-18-08-57.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00003997-PHOTO-2026-10-14-19-42-04.jpg"
+                        alt="WhatsApp field image 13"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003997-PHOTO-2026-10-14-19-42-04.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003997-PHOTO-2026-10-14-19-42-04.jpg</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00003999-VIDEO-2026-10-14-20-30-40.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00003999-VIDEO-2026-10-14-20-30-40.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00003999-VIDEO-2026-10-14-20-30-40.mp4</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004000-PHOTO-2026-10-14-20-36-19.jpg"
+                        alt="WhatsApp field image 15"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004000-PHOTO-2026-10-14-20-36-19.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004000-PHOTO-2026-10-14-20-36-19.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004021-PHOTO-2026-10-14-20-44-27.jpg"
+                        alt="WhatsApp field image 16"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004021-PHOTO-2026-10-14-20-44-27.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004021-PHOTO-2026-10-14-20-44-27.jpg</figcaption>
+                </figure>
+            </div>
+            <div class="post">
+                <div class="label">POSTING ANGLE / DRAFT</div>
+                <p>The expedition is a collective act of observation: a detail noticed by one person can become a
+                    question for the wider team.</p><button class="copy" onclick="copyText(this)">Copy draft</button>
+            </div>
+        </section>
+        <section class="entry" id="entry-9">
+            <div class="entry-head"><span class="date">15 OCT</span>
+                <h2>A halisaurine enters the species list</h2>
+            </div>
+            <p class="summary">Mike Polcyn identified a specimen discussed in the chat as a halisaurine and noted that
+                the Angolan taxon represents a new species in the team’s list to complete. Jonas later clarified that
+                only fragmentary jaw material was visible ex situ and that it was too brittle to collect. This is a
+                significant scientific lead, but public wording should be checked with the researchers before
+                publication.</p>
+            <div class="gallery">
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00004032-VIDEO-2026-10-15-07-23-46.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004032-VIDEO-2026-10-15-07-23-46.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004032-VIDEO-2026-10-15-07-23-46.mp4</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004035-PHOTO-2026-10-15-07-45-36.jpg"
+                        alt="WhatsApp field image 2"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004035-PHOTO-2026-10-15-07-45-36.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004035-PHOTO-2026-10-15-07-45-36.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004037-PHOTO-2026-10-15-10-23-53.jpg"
+                        alt="WhatsApp field image 3"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004037-PHOTO-2026-10-15-10-23-53.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004037-PHOTO-2026-10-15-10-23-53.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004038-PHOTO-2026-10-15-15-29-25.jpg"
+                        alt="WhatsApp field image 4"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004038-PHOTO-2026-10-15-15-29-25.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004038-PHOTO-2026-10-15-15-29-25.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004039-PHOTO-2026-10-15-15-29-31.jpg"
+                        alt="WhatsApp field image 5"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004039-PHOTO-2026-10-15-15-29-31.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004039-PHOTO-2026-10-15-15-29-31.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004040-PHOTO-2026-10-15-15-29-34.jpg"
+                        alt="WhatsApp field image 6"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004040-PHOTO-2026-10-15-15-29-34.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004040-PHOTO-2026-10-15-15-29-34.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004041-PHOTO-2026-10-15-15-29-39.jpg"
+                        alt="WhatsApp field image 7"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004041-PHOTO-2026-10-15-15-29-39.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004041-PHOTO-2026-10-15-15-29-39.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004047-PHOTO-2026-10-15-15-30-32.jpg"
+                        alt="WhatsApp field image 8"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004047-PHOTO-2026-10-15-15-30-32.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004047-PHOTO-2026-10-15-15-30-32.jpg</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00004061-VIDEO-2026-10-15-15-33-05.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004061-VIDEO-2026-10-15-15-33-05.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004061-VIDEO-2026-10-15-15-33-05.mp4</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00004062-VIDEO-2026-10-15-15-35-41.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004062-VIDEO-2026-10-15-15-35-41.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004062-VIDEO-2026-10-15-15-35-41.mp4</figcaption>
+                </figure>
+                <figure class="media"><video controls preload="none"
+                        src="attachments/00004063-VIDEO-2026-10-15-15-35-46.mp4"></video>
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004063-VIDEO-2026-10-15-15-35-46.mp4</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004063-VIDEO-2026-10-15-15-35-46.mp4</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004070-PHOTO-2026-10-15-16-10-33.jpg"
+                        alt="WhatsApp field image 12"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004070-PHOTO-2026-10-15-16-10-33.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004070-PHOTO-2026-10-15-16-10-33.jpg</figcaption>
+                </figure>
+                <figure class="media"><img loading="lazy" src="attachments/00004071-PHOTO-2026-10-15-16-10-34.jpg"
+                        alt="WhatsApp field image 13"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="missing" style="display:none"><b>Media file not
+                            found</b><span>00004071-PHOTO-2026-10-15-16-10-34.jpg</span><small>Place the
+                            WhatsApp-exported media in a folder named <code>attachments</code> beside this HTML
+                            file.</small></div>
+                    <figcaption>00004071-PHOTO-2026-10-15-16-10-34.jpg</figcaption>
+                </figure>
+            </div>
+            <div class="post">
+                <div class="label">POSTING ANGLE / DRAFT</div>
+                <p>One of the most important outcomes of fieldwork can be a new research lead—even when a fragile
+                    specimen cannot be collected. The evidence, its limits and the next questions all matter.</p><button
+                    class="copy" onclick="copyText(this)">Copy draft</button>
+            </div>
+        </section>
+        <div class="endnote">
+            <h2>Editorial notes for communications</h2>
+            <ul>
+                <li>Distinguish confirmed identifications from hypotheses and questions raised in the group.</li>
+                <li>For the 15 October halisaurine discussion, confirm the exact taxonomic wording and whether the team
+                    is comfortable describing it publicly as a new species/taxon.</li>
+                <li>For specimen images, preserve scale and context wherever available; avoid implying that every
+                    fragment was collected.</li>
+                <li>The WhatsApp thread gives little detail on the computer-vision/dentition project so far. Add a
+                    dedicated entry when the student shares the workflow, aims, methods and limitations.</li>
+                <li>Continue updating this diary after the expedition. Retrospective notes and images are welcome; no
+                    daily content production is required from the field team.</li>
+            </ul>
+            <p class="small">Social handles mentioned in the group: @paleoangola · @mnhn.angola ·
+                @mosassauro.angola.doc. Tagging one account is enough for cross-sharing.</p>
+        </div>
+    </main>
+    <footer class="footer">PaleoAngola / MNHN · Expedition 2026 · Working editorial archive</footer>
+    <script>function copyText(btn) { const p = btn.parentElement.querySelector('p').innerText; navigator.clipboard.writeText(p).then(() => { btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy draft', 1600) }).catch(() => { const t = document.createElement('textarea'); t.value = p; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); btn.textContent = 'Copied' }) }</script>
+</body>
+
+</html>
